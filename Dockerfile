@@ -7,4 +7,4 @@ EXPOSE 5000
 RUN pip install -r requirements.txt
 
 # run the application
-CMD ["python", "app.py"]
+CMD ["python", "manage.py"]
