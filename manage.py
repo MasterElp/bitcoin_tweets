@@ -3,6 +3,7 @@ from datetime import date
 from flask_wtf import FlaskForm
 from wtforms.fields.html5 import DateField, IntegerField
 from wtforms.fields.html5 import DateTimeField
+#from wtforms.ext.dateutil.fields import DateTimeField
 from collections import namedtuple
 
 from wtforms.fields.simple import TextField
@@ -10,41 +11,33 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY']='asdf45bgdDDr3w5gDfwf'
 
-class TestForm(FlaskForm):
+class MainForm(FlaskForm):
     tweet_text = TextField('Tweet text')
-    retweets = IntegerField('Retweets', default=0)
-    tweet_datetime = DateTimeField('Tweet time')
-    start_date = DateField('Start Date', default=date.today)
-    end_date = DateField('End Date', default=date.today)
+    #retweets = IntegerField('Retweets', default=0)
+    #tweet_datetime = DateTimeField('Tweet time')
+    
+    def proccess(self):
+        messages.append(Message(self.tweet_text, 'e'))
 
-    def validate_on_submit(self):
-        result = super(TestForm, self).validate()
-        if (self.start_date.data>self.end_date.data):
-            return False
-        else:
-            return result
 
 Message = namedtuple('Message', 'text tag')
 messages = []
-
+error = None
 
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    error = None
-    form = TestForm()
-
-    if form.validate_on_submit():
-        return 'Start Date is : {} End Date is : {}'.format(form.start_date.data, form.end_date.data)
-    else:
-        error = "Start date is greater than End date"
+    
+    main_form = MainForm()
+    main_form.proccess()
     
     #text = request.form['text']
     #tag = request.form['tag']
 
-    messages.append(Message(form.tweet_text, form.tweet_datetime))
+    
+    
 
-    return render_template('index.html', messages=messages, form=form, error=error)
+    return render_template('index.html', messages=messages, form=main_form, error=error)
 
 
 @app.route('/add_message', methods=['POST'])
