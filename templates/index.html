@@ -9,7 +9,7 @@
     <p><strong> Error: </strong></p> {{error}}
     {% endif %}
     <h2>Messages</h2>
-    <form method="post" action="{{url_for('index')}}">
+    <form method="post" action="/add_message">
         {{ form.csrf_token }}
         {{ form.tweet_text.label }}
         {{ form.tweet_text }}

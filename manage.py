@@ -29,7 +29,7 @@ error = None
 def index():
     
     main_form = MainForm()
-    main_form.proccess()
+    #main_form.proccess()
     
     #text = request.form['text']
     #tag = request.form['tag']
@@ -42,7 +42,8 @@ def index():
 
 @app.route('/add_message', methods=['POST'])
 def add_message():
-    
+    main_form = MainForm()
+    main_form.proccess()
 
     return redirect(url_for('index'))
 
