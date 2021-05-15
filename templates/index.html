@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>BGPT</title>
 </head>
 <body>
-    <h2>Messages</h2>
+    <h2>Bitcoin Growth Prediction by Tweets</h2>
     <form method="post" action=".">
         {{ form.csrf_token }}
         <div>{{ form.tweet_text.label }}</div>
         <div>{{ form.tweet_text }} </div>
-        <div></div><button type="submit">Add message</button></div>
+        <div></div><button type="submit">Predict</button></div>
     </form>
     {% if error %}
-    <p><strong> Error: </strong> {{error}} </p> 
+    <p><strong style='color: red;'>* </strong> {{error}} </p> 
     {% endif %}
 
-    <h3>Messages list</h3>
+    <h3>Message</h3>
     {% for message in messages %}
     <div>{{ message }}</b></div>
     {% endfor %}
