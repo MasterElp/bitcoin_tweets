@@ -14,7 +14,7 @@ class MainForm(FlaskForm):
     def validate_on_submit(self):
             result = super(MainForm, self).validate()
 
-            bert_model = controllers.BertModelEmbendibg()
+            bert_model = controllers.GrowPredict()
             bert_model.set_text(self.tweet_text.data)
 
             if (bert_model.get_token_lenght() > constants.TOKENS_MAX_LENGHT):

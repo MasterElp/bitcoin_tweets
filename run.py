@@ -15,12 +15,12 @@ def index():
     error = None
 
     main_form = forms.MainForm()
-    bert_model = controllers.BertModelEmbendibg()
+    bert_model = controllers.GrowPredict()
     
     if (main_form.tweet_text.data != None):
         bert_model.set_text(main_form.tweet_text.data)
         if main_form.validate_on_submit(): 
-            messages.append(bert_model.get_last_hidden_layers())
+            messages.append(bert_model.get_prediction())
         else:
             error = "Token lenght {}. Max {} required.".format(bert_model.get_token_lenght(), constants.TOKENS_MAX_LENGHT)
 
