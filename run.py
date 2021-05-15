@@ -15,13 +15,15 @@ def index():
     error = None
 
     main_form = forms.MainForm()
-    model = controllers.BertModelClassificate(main_form.tweet_text.data)
+    bert_model = controllers.BertModelEmbendibg()
     
-    if main_form.validate_on_submit():
-        messages.append(model.get_token())
-    else:
-        if main_form.is_submitted():
-            error = "Token lenght {}. Max {} required.".format(model.get_token_lenght(), constants.TOKENS_MAX_LENGHT)
+    if (main_form.tweet_text.data != ''):
+        if main_form.validate_on_submit():
+            bert_model.set_text(main_form.tweet_text.data)
+            messages.append(bert_model.get_last_hidden_layers())
+        else:
+            if main_form.is_submitted():
+                error = "Token lenght {}. Max {} required.".format(bert_model.get_token_lenght(), constants.TOKENS_MAX_LENGHT)
 
     return render_template('index.html', form=main_form, messages=messages, error=error)
 

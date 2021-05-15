@@ -14,10 +14,10 @@ class MainForm(FlaskForm):
     def validate_on_submit(self):
             result = super(MainForm, self).validate()
 
-            model = controllers.BertModelClassificate(self.tweet_text.data)
-            print(model.get_token_lenght())
+            bert_model = controllers.BertModelEmbendibg()
+            bert_model.set_text(self.tweet_text.data)
 
-            if (model.get_token_lenght() > constants.TOKENS_MAX_LENGHT):
+            if (bert_model.get_token_lenght() > constants.TOKENS_MAX_LENGHT):
                 return False
             else:
                 return result
