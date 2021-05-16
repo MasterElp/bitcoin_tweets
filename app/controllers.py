@@ -29,7 +29,6 @@ class GrowPredict():
             model_json = file.read()
         self.my_model = model_from_json(model_json)
         self.my_model.load_weights(os.getcwd() + '/data/weights_pr4_51.h5')
-        
 
     def set_text(self, text):
         self.token = self.tokenizer.encode(text, add_special_tokens=True)
@@ -53,8 +52,8 @@ class GrowPredict():
 
     def get_prediction(self):
         if (self.prediction != None):
-            return 'Text is : {} '.format(self.prediction)
+            return self.prediction[0][0]
         else:
-            return 'Text empty'
+            return 'Empty'
 
         

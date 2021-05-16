@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BGPT</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
     <h2>Bitcoin Growth Prediction by Tweets</h2>
@@ -16,7 +17,7 @@
     <p><strong style='color: red;'>* </strong> {{error}} </p> 
     {% endif %}
 
-    <h3>Message</h3>
+    <h3>Result</h3>
     {% for message in messages %}
     <div>{{ message }}</b></div>
     {% endfor %}
