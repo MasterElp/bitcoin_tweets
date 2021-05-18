@@ -25,10 +25,10 @@ class GrowPredict():
         self.bert_model = model_class.from_pretrained(pretrained_weights)
 
         #print(os.getcwd())
-        with open(os.getcwd() + '/data/model_pr4_51.json', 'r') as file:
+        with open(os.getcwd() + f'/data/model_pr4_{constants.MODEL_NUMBER}.json', 'r') as file:
             model_json = file.read()
         self.my_model = model_from_json(model_json)
-        self.my_model.load_weights(os.getcwd() + '/data/weights_pr4_51.h5')
+        self.my_model.load_weights(os.getcwd() + f'/data/weights_pr4_{constants.MODEL_NUMBER}.h5')
 
     def set_text(self, text):
         self.token = self.tokenizer.encode(text, add_special_tokens=True)
