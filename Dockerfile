@@ -1,10 +1,11 @@
-# our base image
-FROM python:3-onbuild
+FROM python:3
 
-# specify the port number the container should expose
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+#RUN pip uninstall tf-nightly
+RUN pip install tensorflow --upgrade --force-reinstall
+COPY . .
+
 EXPOSE 5000
 
-RUN pip install -r requirements.txt
-
-# run the application
-CMD ["python", "manage.py"]
+CMD ["python", "run.py"]
